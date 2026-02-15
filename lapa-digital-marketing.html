@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lapa Digital Marketing — Analytics & Tag Implementation</title>
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+  <!-- End Google Tag Manager -->
+
+  <!-- dataLayer initialization — must be before GTM snippet in production -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      'event': 'page_view_enhanced',
+      'page_type': 'homepage',
+      'site_section': 'main',
+      'business_vertical': 'digital_marketing_agency'
+    });
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --ink:       #0d0d0d;
+      --paper:     #f5f2ec;
+      --cream:     #ede9e0;
+      --lime:      #c8f542;
+      --lime-dark: #a8d82e;
+      --muted:     #6b6860;
+      --border:    #d4cfc4;
+      --white:     #ffffff;
+      --serif: 'DM Serif Display', serif;
+      --sans:  'DM Sans', sans-serif;
+      --mono:  'Space Mono', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--paper);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--paper); }
+    ::-webkit-scrollbar-thumb { background: var(--lime); border-radius: 3px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 48px;
+      background: var(--paper);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--lime-dark); }
+
+    .nav-links {
+      display: flex; gap: 36px; list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    .nav-cta {
+      background: var(--ink);
+      color: var(--lime) !important;
+      padding: 10px 22px;
+      border-radius: 4px;
+      font-size: 13px !important;
+      font-weight: 600 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.06em !important;
+      transition: background 0.2s, transform 0.15s !important;
+    }
+    .nav-cta:hover { background: #222 !important; transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 48px 80px 48px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--lime-dark);
+      margin-bottom: 28px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px; height: 2px;
+      background: var(--lime-dark);
+    }
+
+    .hero-headline {
+      font-family: var(--serif);
+      font-size: clamp(52px, 6vw, 88px);
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 32px;
+    }
+    .hero-headline em {
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--muted);
+      max-width: 440px;
+      margin-bottom: 52px;
+    }
+
+    .hero-actions {
+      display: flex; gap: 16px; align-items: center; flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--ink);
+      color: var(--lime);
+      padding: 16px 36px;
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 4px;
+      border: 2px solid var(--ink);
+      cursor: pointer;
+      display: inline-block;
+      transition: all 0.2s;
+    }
+    .btn-primary:hover {
+      background: transparent;
+      color: var(--ink);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--ink);
+      padding: 16px 36px;
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 4px;
+      border: 2px solid var(--border);
+      cursor: pointer;
+      display: inline-block;
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--ink); }
+
+    .hero-right {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-graphic {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0; right: 0;
+    }
+
+    /* Animated data flow graphic */
+    .data-nodes {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .node-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 24px;
+      padding: 40px;
+      opacity: 0;
+      animation: fadeInUp 0.8s 0.4s forwards;
+    }
+
+    .node {
+      width: 64px; height: 64px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-align: center;
+      line-height: 1.3;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: default;
+    }
+    .node:hover { transform: scale(1.08); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+
+    .node-gtm  { background: var(--ink); color: var(--lime); }
+    .node-ga4  { background: var(--lime); color: var(--ink); }
+    .node-fb   { background: var(--cream); color: var(--ink); border: 1.5px solid var(--border); }
+    .node-dl   { background: #e8f4fd; color: #1a6fa4; border: 1.5px solid #b8d8ef; }
+    .node-conv { background: #fef3cd; color: #92650a; border: 1.5px solid #f0d980; }
+    .node-sst  { background: #f0ffe4; color: #3d7a00; border: 1.5px solid #b2e57a; }
+    .node-heat { background: #fde8e8; color: #b02222; border: 1.5px solid #f0b0b0; }
+    .node-bing { background: #e8f0ff; color: #1a3fa4; border: 1.5px solid #b0c8f0; }
+    .node-tik  { background: #f0e8ff; color: #5a1ab0; border: 1.5px solid #c0a0f0; }
+    .node-lp   { background: var(--ink); color: var(--lime); }
+
+    .hero-badge {
+      position: absolute;
+      bottom: 48px;
+      left: 48px;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
+      display: flex; align-items: center; gap: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      animation: slideUp 0.6s 0.9s both;
+    }
+    .badge-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--lime-dark);
+      box-shadow: 0 0 0 3px rgba(168,216,46,0.25);
+      flex-shrink: 0;
+    }
+    .badge-text {
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+    .badge-text strong { color: var(--ink); display: block; font-size: 11px; }
+
+    /* ── TICKER ── */
+    .ticker {
+      background: var(--ink);
+      color: var(--lime);
+      padding: 14px 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .ticker-inner {
+      display: inline-flex;
+      animation: ticker 28s linear infinite;
+    }
+    .ticker-item {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0 40px;
+    }
+    .ticker-item::before {
+      content: '◆';
+      margin-right: 40px;
+      color: var(--lime-dark);
+      opacity: 0.7;
+    }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 120px 48px; }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--lime-dark);
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-label::before {
+      content: '';
+      width: 24px; height: 2px;
+      background: var(--lime-dark);
+      display: block;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(36px, 4vw, 58px);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+
+    .section-sub {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 540px;
+    }
+
+    /* ── SERVICES ── */
+    #services { background: var(--white); }
+
+    .services-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: end;
+      margin-bottom: 72px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .service-card {
+      background: var(--paper);
+      padding: 44px 36px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+      cursor: default;
+    }
+    .service-card:hover { background: var(--cream); }
+    .service-card:hover .service-arrow { transform: translate(3px, -3px); }
+
+    .service-number {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--border);
+      letter-spacing: 0.1em;
+      margin-bottom: 32px;
+      display: block;
+    }
+
+    .service-icon {
+      width: 48px; height: 48px;
+      background: var(--lime);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      margin-bottom: 24px;
+      transition: transform 0.3s;
+    }
+    .service-card:hover .service-icon { transform: rotate(-5deg) scale(1.05); }
+
+    .service-name {
+      font-family: var(--serif);
+      font-size: 24px;
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+
+    .service-desc {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .service-tags {
+      display: flex; flex-wrap: wrap; gap: 6px;
+    }
+    .service-tag {
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 3px;
+      color: var(--muted);
+    }
+
+    .service-arrow {
+      position: absolute;
+      top: 44px; right: 36px;
+      font-size: 20px;
+      color: var(--border);
+      transition: transform 0.3s;
+    }
+
+    /* ── PROCESS STRIP ── */
+    .process-strip {
+      background: var(--ink);
+      padding: 80px 48px;
+      color: var(--white);
+    }
+    .process-strip .section-label { color: var(--lime); }
+    .process-strip .section-label::before { background: var(--lime); }
+    .process-strip .section-title { color: var(--white); }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      margin-top: 64px;
+    }
+
+    .process-step {
+      background: rgba(255,255,255,0.04);
+      padding: 40px 32px;
+      border-left: 2px solid rgba(255,255,255,0.06);
+      position: relative;
+    }
+    .process-step:first-child { border-left: none; }
+
+    .step-num {
+      font-family: var(--mono);
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--lime);
+      opacity: 0.25;
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .step-title {
+      font-family: var(--serif);
+      font-size: 22px;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    .step-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.7;
+    }
+
+    /* ── PRICING ── */
+    #pricing { background: var(--paper); }
+
+    .pricing-header {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+    .pricing-header .section-label {
+      justify-content: center;
+    }
+    .pricing-header .section-label::before { display: none; }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .pricing-card {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 44px 36px;
+      position: relative;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .pricing-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.08);
+    }
+
+    .pricing-card.featured {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: var(--white);
+    }
+    .pricing-card.featured .pricing-tier { color: var(--lime); }
+    .pricing-card.featured .pricing-price { color: var(--white); }
+    .pricing-card.featured .pricing-period { color: rgba(255,255,255,0.5); }
+    .pricing-card.featured .pricing-desc { color: rgba(255,255,255,0.6); }
+    .pricing-card.featured .pricing-divider { border-color: rgba(255,255,255,0.1); }
+    .pricing-card.featured .pricing-feature { color: rgba(255,255,255,0.8); }
+    .pricing-card.featured .pricing-feature::before { color: var(--lime); }
+    .pricing-card.featured .feature-label { color: rgba(255,255,255,0.4); }
+
+    .featured-badge {
+      position: absolute;
+      top: -14px; left: 50%; transform: translateX(-50%);
+      background: var(--lime);
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 16px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .pricing-tier {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--lime-dark);
+      margin-bottom: 20px;
+    }
+
+    .pricing-price {
+      font-family: var(--serif);
+      font-size: 52px;
+      line-height: 1;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .pricing-period {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .pricing-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    .pricing-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin-bottom: 28px;
+    }
+
+    .pricing-features { list-style: none; margin-bottom: 36px; }
+    .pricing-feature {
+      font-size: 13px;
+      line-height: 1.5;
+      margin-bottom: 12px;
+      padding-left: 20px;
+      position: relative;
+      color: var(--ink);
+    }
+    .pricing-feature::before {
+      content: '✓';
+      position: absolute; left: 0;
+      color: var(--lime-dark);
+      font-weight: 700;
+      font-size: 11px;
+    }
+    .feature-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .btn-pricing {
+      display: block;
+      text-align: center;
+      padding: 14px 24px;
+      border-radius: 6px;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 2px solid var(--ink);
+      background: transparent;
+      color: var(--ink);
+    }
+    .btn-pricing:hover { background: var(--ink); color: var(--lime); }
+
+    .pricing-card.featured .btn-pricing {
+      background: var(--lime);
+      color: var(--ink);
+      border-color: var(--lime);
+    }
+    .pricing-card.featured .btn-pricing:hover {
+      background: var(--lime-dark);
+      border-color: var(--lime-dark);
+    }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--cream); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .contact-info .section-title { margin-bottom: 24px; }
+
+    .contact-detail {
+      margin-top: 48px;
+      display: flex; flex-direction: column; gap: 24px;
+    }
+
+    .contact-item {
+      display: flex; align-items: flex-start; gap: 16px;
+    }
+    .contact-item-icon {
+      width: 40px; height: 40px;
+      background: var(--lime);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .contact-item-text {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+    .contact-item-text strong {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+      font-family: var(--mono);
+      letter-spacing: 0.04em;
+      margin-bottom: 2px;
+    }
+
+    /* ── FORM ── */
+    .contact-form {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 52px 44px;
+    }
+
+    .form-title {
+      font-family: var(--serif);
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+    .form-subtitle {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 36px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      padding: 14px 16px;
+      font-family: var(--sans);
+      font-size: 14px;
+      background: var(--paper);
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      appearance: none;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--ink);
+      box-shadow: 0 0 0 3px rgba(13,13,13,0.06);
+      background: var(--white);
+    }
+    .form-textarea { resize: vertical; min-height: 120px; }
+
+    .form-submit {
+      width: 100%;
+      padding: 18px;
+      background: var(--ink);
+      color: var(--lime);
+      border: none;
+      border-radius: 6px;
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-top: 8px;
+    }
+    .form-submit:hover { background: #1a1a1a; transform: translateY(-1px); }
+    .form-submit:active { transform: translateY(0); }
+
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .form-success .success-icon {
+      width: 64px; height: 64px;
+      background: var(--lime);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px;
+      margin: 0 auto 20px;
+    }
+    .form-success h3 {
+      font-family: var(--serif);
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+    .form-success p {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .form-privacy {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.6;
+      text-align: center;
+      margin-top: 16px;
+    }
+
+    /* ── GTM BADGE ── */
+    .gtm-badge-strip {
+      background: var(--ink);
+      padding: 24px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .gtm-badge-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+    .gtm-badge-items {
+      display: flex; gap: 20px; flex-wrap: wrap; align-items: center;
+    }
+    .gtm-badge-item {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--lime);
+      background: rgba(200,245,66,0.08);
+      border: 1px solid rgba(200,245,66,0.2);
+      padding: 6px 14px;
+      border-radius: 4px;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      padding: 60px 48px 40px;
+      color: rgba(255,255,255,0.5);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-logo {
+      font-family: var(--mono);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 14px;
+    }
+    .footer-logo span { color: var(--lime); }
+    .footer-tagline {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.4);
+    }
+    .footer-heading {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--lime);
+      margin-bottom: 20px;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a {
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--white); }
+    .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin-bottom: 28px; }
+    .footer-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.25);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    @keyframes pulse-dot {
+      0%, 100% { box-shadow: 0 0 0 3px rgba(168,216,46,0.25); }
+      50%       { box-shadow: 0 0 0 6px rgba(168,216,46,0.12); }
+    }
+    .badge-dot { animation: pulse-dot 2.4s ease-in-out infinite; }
+
+    .fade-in-section {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 80px; }
+      .hero-left { padding: 60px 24px 40px; }
+      .hero-right { display: none; }
+      section { padding: 80px 24px; }
+      .services-header { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { padding: 48px 24px 32px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<!-- ── NAV ── -->
+<nav id="mainNav">
+  <a class="nav-logo" href="#" onclick="trackNavClick('logo')">LAPA<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#services" onclick="trackNavClick('services')">Services</a></li>
+    <li><a href="#pricing" onclick="trackNavClick('pricing')">Pricing</a></li>
+    <li><a href="#contact" onclick="trackNavClick('contact')">Contact</a></li>
+    <li><a href="#contact" class="nav-cta" onclick="trackNavClick('cta')">Get a Quote</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero" id="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Analytics & Tag Implementation</div>
+    <h1 class="hero-headline">
+      Data that<br><em>actually</em><br>works.
+    </h1>
+    <p class="hero-sub">
+      GTM builds, GA4 migrations, conversion tracking, and data layer architecture — done right the first time. For agencies, in-house teams, and growth-stage brands.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary" id="heroCTA" onclick="trackCTAClick('hero_primary', 'get_started')">Get Started</a>
+      <a href="#services" class="btn-secondary" onclick="trackCTAClick('hero_secondary', 'view_services')">See Services</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="data-nodes">
+      <div class="node-grid">
+        <div class="node node-gtm">GTM</div>
+        <div class="node node-ga4">GA4</div>
+        <div class="node node-fb">Meta<br>Pixel</div>
+        <div class="node node-dl">Data<br>Layer</div>
+        <div class="node node-conv">Conv<br>API</div>
+        <div class="node node-sst">Server<br>Side</div>
+        <div class="node node-heat">Heat<br>map</div>
+        <div class="node node-bing">Bing<br>UET</div>
+        <div class="node node-tik">TikTok<br>Pixel</div>
+        <div class="node node-lp">LAPA<br>HUB</div>
+      </div>
+    </div>
+    <div class="hero-badge">
+      <div class="badge-dot"></div>
+      <div class="badge-text">
+        <strong>Tracking Active</strong>
+        GTM container deployed · GA4 events firing
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TICKER ── -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-inner" id="tickerInner">
+    <span class="ticker-item">Google Tag Manager</span>
+    <span class="ticker-item">GA4 Implementation</span>
+    <span class="ticker-item">Conversion Tracking</span>
+    <span class="ticker-item">Data Layer Architecture</span>
+    <span class="ticker-item">Meta Pixel Setup</span>
+    <span class="ticker-item">Server-Side Tagging</span>
+    <span class="ticker-item">HIPAA-Compliant Tracking</span>
+    <span class="ticker-item">GTM Audits</span>
+    <span class="ticker-item">Attribution Modeling</span>
+    <span class="ticker-item">Google Tag Manager</span>
+    <span class="ticker-item">GA4 Implementation</span>
+    <span class="ticker-item">Conversion Tracking</span>
+    <span class="ticker-item">Data Layer Architecture</span>
+    <span class="ticker-item">Meta Pixel Setup</span>
+    <span class="ticker-item">Server-Side Tagging</span>
+    <span class="ticker-item">HIPAA-Compliant Tracking</span>
+    <span class="ticker-item">GTM Audits</span>
+    <span class="ticker-item">Attribution Modeling</span>
+  </div>
+</div>
+
+<!-- ── SERVICES ── -->
+<section id="services" class="fade-in-section">
+  <div class="services-header">
+    <div>
+      <div class="section-label">What I Do</div>
+      <h2 class="section-title">Precision tracking,<br>zero guesswork.</h2>
+    </div>
+    <p class="section-sub">Every service is built around one goal: clean, reliable data your team can actually use to make decisions and prove ROI.</p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card" data-service="gtm-implementation" onclick="trackServiceClick('gtm_implementation')">
+      <span class="service-number">01</span>
+      <div class="service-icon">🏷️</div>
+      <h3 class="service-name">GTM Implementation</h3>
+      <p class="service-desc">Full container builds from scratch — data layer setup, triggers, variables, custom HTML tags, and clean workspace organization that your team can actually maintain.</p>
+      <div class="service-tags">
+        <span class="service-tag">GTM</span>
+        <span class="service-tag">Data Layer</span>
+        <span class="service-tag">Triggers</span>
+        <span class="service-tag">Variables</span>
+      </div>
+      <div class="service-arrow">↗</div>
+    </div>
+
+    <div class="service-card" data-service="ga4-setup" onclick="trackServiceClick('ga4_setup')">
+      <span class="service-number">02</span>
+      <div class="service-icon">📊</div>
+      <h3 class="service-name">GA4 Configuration</h3>
+      <p class="service-desc">Event schema design, custom dimensions, conversion configuration, and audience setup. GA4 that reports on the KPIs you care about — not just pageviews.</p>
+      <div class="service-tags">
+        <span class="service-tag">GA4</span>
+        <span class="service-tag">Events</span>
+        <span class="service-tag">Conversions</span>
+        <span class="service-tag">Audiences</span>
+      </div>
+      <div class="service-arrow">↗</div>
+    </div>
+
+    <div class="service-card" data-service="conversion-tracking" onclick="trackServiceClick('conversion_tracking')">
+      <span class="service-number">03</span>
+      <div class="service-icon">🎯</div>
+      <h3 class="service-name">Conversion Tracking</h3>
+      <p class="service-desc">Google Ads, Meta, Bing, and TikTok pixel implementation. Enhanced conversions and CAPI setup so your ad platforms have the signal quality they need to optimize.</p>
+      <div class="service-tags">
+        <span class="service-tag">Google Ads</span>
+        <span class="service-tag">Meta CAPI</span>
+        <span class="service-tag">Enhanced Conv.</span>
+      </div>
+      <div class="service-arrow">↗</div>
+    </div>
+
+    <div class="service-card" data-service="tag-audits" onclick="trackServiceClick('tag_audits')">
+      <span class="service-number">04</span>
+      <div class="service-icon">🔍</div>
+      <h3 class="service-name">Tag Audits</h3>
+      <p class="service-desc">Comprehensive review of your existing GTM container and analytics setup. Identify duplicate tags, misfiring events, data quality issues, and compliance risks.</p>
+      <div class="service-tags">
+        <span class="service-tag">Audit</span>
+        <span class="service-tag">QA</span>
+        <span class="service-tag">Duplicate Tags</span>
+        <span class="service-tag">Compliance</span>
+      </div>
+      <div class="service-arrow">↗</div>
+    </div>
+
+    <div class="service-card" data-service="healthcare-hipaa" onclick="trackServiceClick('healthcare_hipaa')">
+      <span class="service-number">05</span>
+      <div class="service-icon">🏥</div>
+      <h3 class="service-name">Healthcare & HIPAA Tracking</h3>
+      <p class="service-desc">Specialized tracking implementation for healthcare organizations. PHI stripping, compliant event configuration, and ad platform setup that meets HHS guidance.</p>
+      <div class="service-tags">
+        <span class="service-tag">HIPAA</span>
+        <span class="service-tag">PHI Stripping</span>
+        <span class="service-tag">Healthcare</span>
+      </div>
+      <div class="service-arrow">↗</div>
+    </div>
+
+    <div class="service-card" data-service="reporting-dashboards" onclick="trackServiceClick('reporting_dashboards')">
+      <span class="service-number">06</span>
+      <div class="service-icon">📈</div>
+      <h3 class="service-name">Reporting & Dashboards</h3>
+      <p class="service-desc">Looker Studio and GA4 Exploration dashboards built around your actual reporting needs. So the data you worked hard to collect finally gets used.</p>
+      <div class="service-tags">
+        <span class="service-tag">Looker Studio</span>
+        <span class="service-tag">GA4 Explore</span>
+        <span class="service-tag">Reporting</span>
+      </div>
+      <div class="service-arrow">↗</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROCESS ── -->
+<div class="process-strip fade-in-section">
+  <div class="section-label">How It Works</div>
+  <h2 class="section-title" style="color: var(--white);">From messy to<br><em style="color: rgba(255,255,255,0.45)">clean data</em> in four steps.</h2>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="step-num">01</div>
+      <div class="step-title">Audit & Scope</div>
+      <p class="step-desc">Review your existing setup, identify gaps and conflicts, and define exactly what needs to be tracked and why.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">02</div>
+      <div class="step-title">Tracking Plan</div>
+      <p class="step-desc">Build a documented tracking specification — event names, parameters, triggers, and data layer requirements agreed on before any code is written.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">03</div>
+      <div class="step-title">Implementation</div>
+      <p class="step-desc">GTM build, data layer pushes, tag configuration. Every change documented, every tag QA'd in preview mode before publishing.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">04</div>
+      <div class="step-title">QA & Handoff</div>
+      <p class="step-desc">End-to-end validation against the tracking spec. You get a clean container, documentation, and a walkthrough so nothing is a black box.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── PRICING ── -->
+<section id="pricing" class="fade-in-section">
+  <div class="pricing-header">
+    <div class="section-label">Pricing</div>
+    <h2 class="section-title">Straightforward rates.<br>No surprises.</h2>
+    <p class="section-sub" style="margin: 0 auto;">Project-based pricing for one-time implementations, or retainer packages for ongoing tag management and analytics support.</p>
+  </div>
+
+  <div class="pricing-grid">
+    <div class="pricing-card" data-plan="starter" onclick="trackPricingView('starter')">
+      <div class="pricing-tier">Starter</div>
+      <div class="pricing-price">$750</div>
+      <div class="pricing-period">one-time project</div>
+      <p class="pricing-desc">For small sites or campaigns that need a clean foundation.</p>
+      <hr class="pricing-divider" />
+      <ul class="pricing-features">
+        <span class="feature-label">Includes</span>
+        <li class="pricing-feature">GTM container setup or audit</li>
+        <li class="pricing-feature">GA4 base configuration</li>
+        <li class="pricing-feature">Up to 5 custom events</li>
+        <li class="pricing-feature">1 ad platform pixel</li>
+        <li class="pricing-feature">QA documentation</li>
+      </ul>
+      <button class="btn-pricing" onclick="trackCTAClick('pricing_starter', 'get_started'); scrollToContact()">Get Started</button>
+    </div>
+
+    <div class="pricing-card featured" data-plan="growth" onclick="trackPricingView('growth')">
+      <div class="featured-badge">Most Popular</div>
+      <div class="pricing-tier">Growth</div>
+      <div class="pricing-price">$1,800</div>
+      <div class="pricing-period">one-time project</div>
+      <p class="pricing-desc">Full tracking stack for growing businesses with active paid campaigns.</p>
+      <hr class="pricing-divider" />
+      <ul class="pricing-features">
+        <span class="feature-label">Everything in Starter, plus</span>
+        <li class="pricing-feature">Complete data layer architecture</li>
+        <li class="pricing-feature">Up to 15 custom events</li>
+        <li class="pricing-feature">All ad platform pixels + CAPI</li>
+        <li class="pricing-feature">Enhanced conversions setup</li>
+        <li class="pricing-feature">Looker Studio dashboard</li>
+        <li class="pricing-feature">60-day post-launch support</li>
+      </ul>
+      <button class="btn-pricing" onclick="trackCTAClick('pricing_growth', 'get_started'); scrollToContact()">Get Started</button>
+    </div>
+
+    <div class="pricing-card" data-plan="retainer" onclick="trackPricingView('retainer')">
+      <div class="pricing-tier">Retainer</div>
+      <div class="pricing-price">$600</div>
+      <div class="pricing-period">per month</div>
+      <p class="pricing-desc">Ongoing tag management, QA, and analytics support for teams that can't afford data gaps.</p>
+      <hr class="pricing-divider" />
+      <ul class="pricing-features">
+        <span class="feature-label">Monthly scope</span>
+        <li class="pricing-feature">Tag updates & new implementations</li>
+        <li class="pricing-feature">Monthly QA & health checks</li>
+        <li class="pricing-feature">Ad platform tag maintenance</li>
+        <li class="pricing-feature">Analytics support & reporting</li>
+        <li class="pricing-feature">Priority response time</li>
+      </ul>
+      <button class="btn-pricing" onclick="trackCTAClick('pricing_retainer', 'contact'); scrollToContact()">Let's Talk</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── GTM CODE BADGE ── -->
+<div class="gtm-badge-strip">
+  <span class="gtm-badge-label">This site is tagged with →</span>
+  <div class="gtm-badge-items">
+    <span class="gtm-badge-item">GTM</span>
+    <span class="gtm-badge-item">GA4</span>
+    <span class="gtm-badge-item">dataLayer</span>
+    <span class="gtm-badge-item">Scroll Depth</span>
+    <span class="gtm-badge-item">Form Tracking</span>
+    <span class="gtm-badge-item">Click Events</span>
+  </div>
+</div>
+
+<!-- ── CONTACT ── -->
+<section id="contact" class="fade-in-section">
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div class="section-label">Let's Work Together</div>
+      <h2 class="section-title">Tell me about<br>your project.</h2>
+      <p class="section-sub">Whether you need a full tracking implementation, an audit on what you have, or just a second opinion — I'm happy to talk through it.</p>
+
+      <div class="contact-detail">
+        <div class="contact-item">
+          <div class="contact-item-icon">📍</div>
+          <div class="contact-item-text">
+            <strong>Location</strong>
+            West Palm Beach, FL — Available Remotely
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">⚡</div>
+          <div class="contact-item-text">
+            <strong>Response Time</strong>
+            Within 24 hours on business days
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">🔧</div>
+          <div class="contact-item-text">
+            <strong>Platforms</strong>
+            GTM · GA4 · Google Ads · Meta · Bing · TikTok · Looker Studio
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form">
+      <div id="formContainer">
+        <div class="form-title">Get a Free Quote</div>
+        <p class="form-subtitle">No commitment — just a clear scope and honest pricing.</p>
+
+        <div id="leadForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="firstName">First Name *</label>
+              <input class="form-input" type="text" id="firstName" name="first_name" placeholder="Jane" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="lastName">Last Name *</label>
+              <input class="form-input" type="text" id="lastName" name="last_name" placeholder="Smith" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="email">Email Address *</label>
+            <input class="form-input" type="email" id="email" name="email" placeholder="jane@company.com" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="company">Company / Website</label>
+            <input class="form-input" type="text" id="company" name="company" placeholder="Acme Inc." />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="service">What Do You Need?</label>
+            <select class="form-select" id="service" name="service_interest">
+              <option value="">Select a service...</option>
+              <option value="gtm_implementation">GTM Implementation</option>
+              <option value="ga4_configuration">GA4 Configuration</option>
+              <option value="conversion_tracking">Conversion Tracking</option>
+              <option value="tag_audit">Tag Audit</option>
+              <option value="healthcare_hipaa">Healthcare / HIPAA Tracking</option>
+              <option value="retainer">Monthly Retainer</option>
+              <option value="not_sure">Not Sure — Let's Talk</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="message">Tell Me More</label>
+            <textarea class="form-textarea" id="message" name="message" placeholder="What platform are you on, what's not tracking correctly, or what are you trying to measure?"></textarea>
+          </div>
+
+          <button class="form-submit" id="submitBtn" type="button" onclick="handleFormSubmit()">
+            Send Message →
+          </button>
+
+          <p class="form-privacy">🔒 Your information is never shared or sold. I take data privacy seriously — this form is built to the same standards I apply to client tracking implementations.</p>
+        </div>
+      </div>
+
+      <div class="form-success" id="formSuccess">
+        <div class="success-icon">✓</div>
+        <h3>Message Received!</h3>
+        <p>Thanks for reaching out. I'll be in touch within 24 hours to talk through your project.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">LAPA<span>.</span></div>
+      <p class="footer-tagline">Analytics implementation & tag management for growth-stage brands and agencies. Clean data. Reliable tracking. No guesswork.</p>
+    </div>
+    <div>
+      <div class="footer-heading">Services</div>
+      <ul class="footer-links">
+        <li><a href="#services">GTM Implementation</a></li>
+        <li><a href="#services">GA4 Configuration</a></li>
+        <li><a href="#services">Conversion Tracking</a></li>
+        <li><a href="#services">Tag Audits</a></li>
+        <li><a href="#services">Healthcare Tracking</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Contact</div>
+      <ul class="footer-links">
+        <li><a href="#contact">Get a Quote</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#">LinkedIn</a></li>
+      </ul>
+    </div>
+  </div>
+  <hr class="footer-divider" />
+  <div class="footer-bottom">
+    <span>© 2026 Lapa Digital Marketing. All rights reserved.</span>
+    <span>Built & tracked by Lapa · GTM-XXXXXXX</span>
+  </div>
+</footer>
+
+
+<!-- ════════════════════════════════════════════
+     TAG IMPLEMENTATION — PORTFOLIO SHOWCASE
+     All tracking logic lives here, mirrors what
+     you'd wire up in an actual GTM container.
+     ════════════════════════════════════════════ -->
+<script>
+// ── dataLayer initialization (already in <head> above)
+// Re-confirming dataLayer exists
+window.dataLayer = window.dataLayer || [];
+
+// ─────────────────────────────────────────────
+// SCROLL DEPTH TRACKING
+// Fires at 25%, 50%, 75%, 100% scroll depth
+// In GTM: Trigger → Custom Event "scroll_depth"
+// ─────────────────────────────────────────────
+(function() {
+  const thresholds = [25, 50, 75, 100];
+  const fired = new Set();
+
+  function getScrollDepth() {
+    const scrollTop  = window.pageYOffset || document.documentElement.scrollTop;
+    const docHeight  = document.documentElement.scrollHeight - window.innerHeight;
+    return docHeight > 0 ? Math.round((scrollTop / docHeight) * 100) : 0;
+  }
+
+  function onScroll() {
+    const depth = getScrollDepth();
+    thresholds.forEach(threshold => {
+      if (depth >= threshold && !fired.has(threshold)) {
+        fired.add(threshold);
+        window.dataLayer.push({
+          'event': 'scroll_depth',
+          'scroll_threshold': threshold,
+          'scroll_units': 'percent',
+          'page_location': window.location.href,
+          'page_title': document.title
+        });
+        console.log('[GTM] scroll_depth fired →', threshold + '%');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
+
+
+// ─────────────────────────────────────────────
+// NAV CLICK TRACKING
+// In GTM: Trigger → Custom Event "nav_click"
+// ─────────────────────────────────────────────
+function trackNavClick(linkName) {
+  window.dataLayer.push({
+    'event': 'nav_click',
+    'nav_link_name': linkName,
+    'nav_link_location': 'primary_nav'
+  });
+  console.log('[GTM] nav_click →', linkName);
+}
+
+
+// ─────────────────────────────────────────────
+// CTA CLICK TRACKING
+// In GTM: Trigger → Custom Event "cta_click"
+// ─────────────────────────────────────────────
+function trackCTAClick(ctaLocation, ctaText) {
+  window.dataLayer.push({
+    'event': 'cta_click',
+    'cta_location': ctaLocation,
+    'cta_text': ctaText,
+    'page_location': window.location.href
+  });
+  console.log('[GTM] cta_click →', ctaLocation, '|', ctaText);
+}
+
+
+// ─────────────────────────────────────────────
+// SERVICE CARD CLICK TRACKING
+// In GTM: Trigger → Custom Event "service_click"
+// ─────────────────────────────────────────────
+function trackServiceClick(serviceName) {
+  window.dataLayer.push({
+    'event': 'service_click',
+    'service_name': serviceName,
+    'interaction_type': 'card_click'
+  });
+  console.log('[GTM] service_click →', serviceName);
+}
+
+
+// ─────────────────────────────────────────────
+// PRICING CARD VIEW TRACKING
+// In GTM: Trigger → Custom Event "pricing_view"
+// ─────────────────────────────────────────────
+function trackPricingView(planName) {
+  window.dataLayer.push({
+    'event': 'pricing_view',
+    'plan_name': planName,
+    'interaction_type': 'card_click'
+  });
+  console.log('[GTM] pricing_view →', planName);
+}
+
+
+// ─────────────────────────────────────────────
+// FORM TRACKING
+// Tracks: form_start, form_field_complete, form_submit, generate_lead
+// In GTM: Each event maps to a separate GA4 tag
+// generate_lead → Conversion tag
+// ─────────────────────────────────────────────
+
+let formStarted = false;
+
+// Track form_start on first field interaction
+document.querySelectorAll('.form-input, .form-select, .form-textarea').forEach(field => {
+  field.addEventListener('focus', function() {
+    if (!formStarted) {
+      formStarted = true;
+      window.dataLayer.push({
+        'event': 'form_start',
+        'form_name': 'contact_quote_form',
+        'form_location': 'contact_section'
+      });
+      console.log('[GTM] form_start fired');
+    }
+  });
+
+  // Track field completion on blur
+  field.addEventListener('blur', function() {
+    if (this.value.trim() !== '') {
+      window.dataLayer.push({
+        'event': 'form_field_complete',
+        'form_name': 'contact_quote_form',
+        'field_name': this.name || this.id,
+        'field_type': this.type || this.tagName.toLowerCase()
+      });
+      console.log('[GTM] form_field_complete →', this.name || this.id);
+    }
+  });
+});
+
+
+function handleFormSubmit() {
+  const email     = document.getElementById('email').value.trim();
+  const firstName = document.getElementById('firstName').value.trim();
+  const service   = document.getElementById('service').value;
+
+  // Basic validation
+  if (!firstName) { alert('Please enter your first name.'); return; }
+  if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
+
+  // ── form_submit event ──
+  window.dataLayer.push({
+    'event': 'form_submit',
+    'form_name': 'contact_quote_form',
+    'form_location': 'contact_section',
+    'service_interest': service || 'not_selected'
+    // NOTE: No PII (email, name) pushed to dataLayer
+    // PHI/PII best practice: keep personal data server-side only
+  });
+  console.log('[GTM] form_submit fired');
+
+  // ── generate_lead — CONVERSION EVENT ──
+  // This is what you'd map to a Google Ads conversion action
+  // and a GA4 conversion mark
+  window.dataLayer.push({
+    'event': 'generate_lead',
+    'lead_source': 'website_contact_form',
+    'lead_type': 'quote_request',
+    'service_interest': service || 'not_selected',
+    'currency': 'USD',
+    // No value set on lead — could be estimated based on service tier
+  });
+  console.log('[GTM] generate_lead CONVERSION fired ✓');
+
+  // Show success state
+  document.getElementById('leadForm').style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+}
+
+
+// ─────────────────────────────────────────────
+// SCROLL-TRIGGERED SECTION VISIBILITY
+// Fade in sections as user scrolls
+// ─────────────────────────────────────────────
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+
+
+// ─────────────────────────────────────────────
+// NAV SCROLL EFFECT
+// ─────────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+
+
+// ─────────────────────────────────────────────
+// UTILITY: Smooth scroll to contact
+// ─────────────────────────────────────────────
+function scrollToContact() {
+  document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+}
+
+
+// ─────────────────────────────────────────────
+// TIME ON PAGE (engagement tracking)
+// Fires at 30s and 60s — signals high-intent users
+// In GTM: Custom Event "time_on_page"
+// ─────────────────────────────────────────────
+[30, 60].forEach(seconds => {
+  setTimeout(() => {
+    window.dataLayer.push({
+      'event': 'time_on_page',
+      'engagement_time_seconds': seconds,
+      'page_location': window.location.href
+    });
+    console.log('[GTM] time_on_page →', seconds + 's');
+  }, seconds * 1000);
+});
+
+
+// ─────────────────────────────────────────────
+// CONSOLE LOG — Portfolio note
+// ─────────────────────────────────────────────
+console.log('%c🏷️  LAPA Digital Marketing', 'font-size:16px; font-weight:bold; color:#a8d82e');
+console.log('%cTracking implementation by Lapa Digital Marketing', 'color:#888; font-size:12px');
+console.log('%cOpen the dataLayer in GTM Preview to inspect all events →', 'color:#555; font-size:11px');
+console.log('window.dataLayer:', window.dataLayer);
+</script>
+
+</body>
+</html>
